@@ -9,6 +9,18 @@
     <title>Inscription</title>
 </head>
 <body>
-    
+    <form action="../addUser.php" method="post" enctype="multipart/form-data">
+        <p>Veuillez saisir le nom</p>
+        <input type="text" name="nom">
+        <p>Veuillez saisir le prenom</p>
+        <input type="text" name="prenom">
+        <p>Veuillez saisir votre mail</p>
+        <input type="email" name="mail">
+        <p>Un mot de passe</p>
+        <input type="password" name="password">
+        <p>Et une image de profil</p>
+        <input type="file" name="pfp">
+        <input type="submit" name="submit" value="envoyer">
+    </form>
 </body>
 </html>
