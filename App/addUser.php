@@ -11,16 +11,41 @@
             //stocker le contenu du formulaire
             $destination = "../Public/asset/image/";
             // A voir, pas sur du deuxième attribut
-            move_uploaded_file($_FILES['pfp']['tmp_name'],$destination.$_FILES['pfp']['name']);
-            echo "le fichier à bien été importé";
+            $stmt = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_utilisateur=?");
+            $stmt->execute([$mail]); 
+            $user = $stmt->fetch();
+            if ($user) {
+                echo 'e-mail non valide';
+                exit;
+            } else {
+                addArticleV3($bdd,$nom,$prenom,$mail,$password,$_FILES['pfp']['tmp_name'],1);
+                if($_FILES['pfp']['tmp_name'] !=""){
+                move_uploaded_file($_FILES['pfp']['tmp_name'],$destination.$_FILES['pfp']['name']);
+                echo "le fichier à bien été importé et le compte crée";
+            } 
         }
-        addArticleV3($bdd,$nom,$prenom,$mail,$password,$_FILES['pfp']['tmp_name'],1);
-        echo 'l\'urilisateur à bien été ajouté à la BDD';
-    }
-        else{
-            echo 'Veuillez remplir tous les champs du formulaire et corrige ton code';
+    }else{
+            // boucle d'image manquante
+            $_FILES['pfp']['tmp_name'] = ".../Public/asset/image/blank-profile-picture-973460_960_720-1.png";
+            $destination = "../Public/asset/image/";
+            $stmt = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_utilisateur=?");
+            $stmt->execute([$mail]); 
+            $user = $stmt->fetch();
+            if ($user) {
+                echo 'e-mail non valide';
+                exit;
+            } else {
+                addArticleV3($bdd,$nom,$prenom,$mail,$password,$_FILES['pfp']['tmp_name'],1);
+                if($_FILES['pfp']['tmp_name'] !=""){
+                move_uploaded_file($_FILES['pfp']['tmp_name'],$destination.$_FILES['pfp']['name']);
+                echo "le fichier à bien été importé et le compte crée";
+            } 
+          }
         }
+    }else{
+        echo 'remplissez tout les champs';
     }
+}
     function get_file_extension($file) {
         return substr(strrchr($file,'.'),1);
     }
@@ -44,6 +69,7 @@
             $req2->bindParam(5, $image, PDO::PARAM_STR);
             $req2->bindParam(6, $user, PDO::PARAM_STR);
             //exécution de la requête
+            password_hash($password, PASSWORD_BCRYPT);
             $req2->execute();
         }
         //gestion des erreurs (Exeception)
