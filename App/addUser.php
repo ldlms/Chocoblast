@@ -57,6 +57,7 @@
             $prenom = $prenom;
             $email = $email;
             $password = $password;
+            $hashed = password_hash($password, PASSWORD_BCRYPT);
             $image = $_FILES['pfp']['tmp_name'];
             $user = 1;
             //préparation de la requête
@@ -65,11 +66,10 @@
             $req2->bindParam(1, $nom, PDO::PARAM_STR);
             $req2->bindParam(2, $prenom, PDO::PARAM_STR);
             $req2->bindParam(3, $email, PDO::PARAM_STR);
-            $req2->bindParam(4, $password, PDO::PARAM_STR);
+            $req2->bindParam(4, $hashed, PDO::PARAM_STR);
             $req2->bindParam(5, $image, PDO::PARAM_STR);
             $req2->bindParam(6, $user, PDO::PARAM_STR);
             //exécution de la requête
-            password_hash($password, PASSWORD_BCRYPT);
             $req2->execute();
         }
         //gestion des erreurs (Exeception)
