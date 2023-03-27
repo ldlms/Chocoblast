@@ -15,7 +15,7 @@
         <p>Veuillez saisir le prenom</p>
         <input type="text" name="prenom">
         <p>Veuillez saisir votre mail</p>
-        <input type="email" name="mail">
+        <input type="text" name="mail">
         <p>Un mot de passe</p>
         <input type="password" name="password">
         <p>Et une image de profil</p>
