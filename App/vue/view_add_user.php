@@ -9,7 +9,7 @@
     <title>Inscription</title>
 </head>
 <body>
-    <form action="../addUser.php" method="post" enctype="multipart/form-data">
+    <form action="#" method="post" enctype="multipart/form-data">
         <p>Veuillez saisir le nom</p>
         <input type="text" name="nom">
         <p>Veuillez saisir le prenom</p>
@@ -22,5 +22,6 @@
         <input type="file" name="pfp">
         <input type="submit" name="submit" value="envoyer">
     </form>
+    <div><?php echo $message ?></div>
 </body>
 </html>
