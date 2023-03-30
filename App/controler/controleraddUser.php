@@ -1,18 +1,17 @@
 <?php
-    include '../utils/connectBdd.php';
-    include '../model/utilisateur.php';
-    include '../manager/managerUtilisateur.php';
+    include './App/model/utilisateur.php';
+    include './App/manager/managerUtilisateur.php';
     
     $message = "veuillez renseigner vos informations";
     if(isset($_POST['submit'])){
         //tester si les champs sont remplis, et si le mail est conforme, suivi du nettoyage
         if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['mail']) AND filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) AND !empty($_POST['password'])){
-            $nom = valid_donnees($_POST['nom']);
-            $prenom = valid_donnees($_POST['prenom']);
-            $mail = valid_donnees($_POST['mail']);
-            $password = valid_donnees($_POST['password']);
+            $nom = fonction::cleanData($_POST['nom']);
+            $prenom = fonction::cleanData($_POST['prenom']);
+            $mail = fonction::cleanData($_POST['mail']);
+            $password = fonction::cleanData($_POST['password']);
             $inscrit = new Utilisateur($nom,$prenom,$mail,$password);
-            $destination = "../../Public/asset/image/";
+            $destination = "./App/Public/asset/image/";
             $bdd = BddConnect::connexion();
             $stmt = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_utilisateur=?");
             $stmt->execute([$mail]); 
@@ -42,13 +41,5 @@
         return substr(strrchr($file,'.'),1);
     }
 
-    function valid_donnees($donnees){
-        $donnees = trim($donnees);
-        $donnees = stripslashes($donnees);
-        $donnees = htmlentities($donnees);
-        $donnees = strip_tags($donnees);
-        return $donnees;
-    }
-
-    include '../vue/view_add_user.php';
+    include './App/vue/view_add_user.php';
 ?>
