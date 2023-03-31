@@ -13,7 +13,7 @@ case $path === "/choco/inscription" :
 include './App/controler/controleraddUser.php';
 break ;
 //route /projet/addUser -> ./controler/controler_add_user.php
-case $path === "/choco/connexion.php ":
+case $path === "/choco/connexion":
 include './App/controler/controlerConnectUser.php';
 break ;
 default:

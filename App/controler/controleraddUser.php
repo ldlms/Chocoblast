@@ -11,7 +11,7 @@
             $mail = fonction::cleanData($_POST['mail']);
             $password = fonction::cleanData($_POST['password']);
             $inscrit = new Utilisateur($nom,$prenom,$mail,$password);
-            $destination = "./App/Public/asset/image/";
+            $destination = "./public/asset/image/";
             $bdd = BddConnect::connexion();
             $stmt = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_utilisateur=?");
             $stmt->execute([$mail]); 
@@ -20,7 +20,7 @@
                 $message = 'e-mail non valide';
             } else {
                     if($_FILES['pfp']['tmp_name'] !=""){
-                        move_uploaded_file($_FILES['pfp']['tmp_name'],$destination.$_FILES['pfp']['name']);
+                        move_uploaded_file($_FILES['pfp']['tmp_name'],$destination.$nom.$mail);
                         $inscrit->insertUser($bdd);
                         $message = "le fichier à bien été importé et le compte crée<br>";
                     }else{
