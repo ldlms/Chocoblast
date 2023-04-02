@@ -25,5 +25,9 @@
     </form>
     <div><?php echo $message ?></div>
     <div><a href="connexion">connexion</a></div>
+    <br>
+    <div><a href="/choco/">Retour à l'acceuil</a></div>
+    <br>
+    <div><a href="deco">Deconnection</a></div>
 </body>
 </html>

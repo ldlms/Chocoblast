@@ -16,8 +16,11 @@ break ;
 case $path === "/choco/connexion":
 include './App/controler/controlerConnectUser.php';
 break ;
-default:
-    include './App/controler/controleraddUser.php';
+case $path === "/choco/deco";
+include './App/controler/controlerDeconection.php';
+break;
+case $path === '/choco/':
+    include './App/controler/controlerAcceuil.php';
 // ET LA ON BALANCE LES DIFFERENTS CONTROLLEURS
 }
 ?>

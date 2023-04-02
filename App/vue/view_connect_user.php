@@ -15,5 +15,9 @@
     </form>
    <?php echo $message ?>
    <div><a href="inscription">inscription</a></div>
+   <br>
+   <div><a href="/choco/">Retour à l'acceuil</a></div>
+   <br>
+   <div><a href="deco">Deconnection</a></div>
 </body>
 </html>
