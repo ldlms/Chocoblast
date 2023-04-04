@@ -1,6 +1,13 @@
 <?php
 include './App/utils/connectBdd.php';
 include './App/utils/function.php';
+include './App/model/utilisateur.php';
+include './App/manager/managerUtilisateur.php';
+include './App/API/ApiUtilisateur.php';
+
+// On instance l'API
+$api = new ApiUtilisateur();
+
 //Analyse de l'URL avec parse_url() et retourne ses composants
 $url = parse_url($_SERVER['REQUEST_URI']);
 //test soit l'url a une route sinon on renvoi à la racine

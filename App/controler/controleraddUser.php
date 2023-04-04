@@ -1,6 +1,4 @@
 <?php
-    include './App/model/utilisateur.php';
-    include './App/manager/managerUtilisateur.php';
     
     $message = "veuillez renseigner vos informations";
     if(isset($_POST['submit'])){
