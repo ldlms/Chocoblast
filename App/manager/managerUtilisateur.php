@@ -6,10 +6,10 @@
             try{
             $mail = $this->getMail();
             $bdd = BddConnect::connexion();
-            $req = $bdd->prepare("SELECT ('nom_utilisateur','prenom_utilisateur','mail_utilisateur','password_utilisateur') FROM utilisateur WHERE mail_utilisateur=?");
+            $req = $bdd->prepare("SELECT nom_utilisateur,prenom_utilisateur,mail_utilisateur,password_utilisateur FROM utilisateur WHERE mail_utilisateur=?");
             $req->bindParam(1,$mail, PDO::PARAM_STR);
             $req->execute();
-            $data = $req->fetchAll();
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
             return $data;
             } catch (Exception $e){
                 die('Error: '.$e->getMessage());

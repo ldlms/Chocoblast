@@ -1,14 +1,19 @@
 <?php
-    session_start();
     if(isset($_POST['submit'])){
-        $nom = fonction::cleanData($_POST['login']);
-        $bdd = BddConnect::connexion();
-        $stmt = $bdd->prepare("SELECT nom_utilisateur FROM utilisateur WHERE nom_utilisateur=?");
-        $stmt->execute([$nom]);
-        $user = $stmt->fetch();
-        if($user){
-            $_SESSION['login'] = $_POST['login'];
-            $message = "bienvenue ".$nom;
+        $password = fonction::cleanData($_POST['password']);
+        $mail = fonction::cleanData($_POST['mail']);
+        $connecte = new ManagerUtilisateur(null,null,$mail,$password);
+        // var_dump($connecte);
+        $result = $connecte->getUserByMail();
+        if($result){
+            if(password_verify($password,$result[0]["password_utilisateur"])){
+            $_SESSION['prenom'] = $result[0]["prenom_utilisateur"];
+            $_SESSIOn['mail'] = $result[0]['mail_utilisateur'];
+            $message = "bienvenue ".$_SESSION['prenom'];
+            }else{
+                $message = 'mauvais mot de passe';
+            }
+
         }else{
             $message = "veuillez vous inscrire avant de vous connecter";
         }

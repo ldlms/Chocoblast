@@ -1,8 +1,7 @@
 <?php
-session_start();
 $message ='';
-if(isset($_SESSION['login'])){
-    $message = $_SESSION['login'].' est bien deconnecté';
+if(isset($_SESSION['prenom'])){
+    $message = $_SESSION['prenom'].' est bien deconnecté';
 }else{
     $message = 'Vous n\'étes pas connecté';
 }

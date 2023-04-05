@@ -10,7 +10,8 @@
 </head>
 <body>
     <form action="#" method="post">
-        <input type="text" name="login">
+        <input type="password" name="password" placeholder="mot de passe">
+        <input type="mail" name="mail" placeholder="mail">
         <input type="submit" name="submit" value="Connexion">
     </form>
    <?php echo $message ?>

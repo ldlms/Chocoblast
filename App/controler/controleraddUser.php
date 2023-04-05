@@ -9,7 +9,7 @@
             $mail = fonction::cleanData($_POST['mail']);
             $password = fonction::cleanData($_POST['password']);
             $image = $_FILES['pfp']['tmp_name'];
-            $inscrit = new Utilisateur($nom,$prenom,$mail,$password);
+            $inscrit = new ManagerUtilisateur($nom,$prenom,$mail,$password);
             $destination = "./public/asset/image/".$_FILES['pfp']['name'].'';
             $bdd = BddConnect::connexion();
             $stmt = $bdd->prepare("SELECT * FROM utilisateur WHERE mail_utilisateur=?");
@@ -34,10 +34,6 @@
             }
         }else{
         $message = 'remplissez tout les champs';
-    }
-
-    function get_file_extension($file) {
-        return substr(strrchr($file,'.'),1);
     }
 
     include './App/vue/view_add_user.php';

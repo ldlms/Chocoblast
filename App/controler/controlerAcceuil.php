@@ -1,9 +1,8 @@
 <?php
-session_start();
-if(!isset($_SESSION['login'])){
+if(!isset($_SESSION['prenom'])){
 $message = 'Veuillez vous connecter pour accéder au site';
 }else{
-$message = 'Bienvenue '.$_SESSION['login'];
+$message = 'Bienvenue '.$_SESSION['prenom'];
 }
 
 
